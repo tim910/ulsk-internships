@@ -12,14 +12,10 @@ python manage.py collectstatic --no-input
 python manage.py migrate
 
 # 4. Загрузить реальные данные (компании, стажировки, пользователи)
-#    вместе с привязкой к картинкам — ОДИН раз, если база ещё пустая.
-#    site_data.json — это дамп локальной базы (manage.py dumpdata).
-if python manage.py shell -c "import sys; from internships.models import Internship; sys.exit(0 if Internship.objects.exists() else 1)"; then
-    echo "Данные уже есть — пропускаю загрузку."
-else
-    echo "База пустая — загружаю данные из site_data.json..."
-    python manage.py loaddata site_data.json
-fi
+#    вместе с привязкой к картинкам. loaddata обновляет записи по их ID
+#    из site_data.json — дубликатов не создаёт, поэтому запускаем каждый раз.
+echo "Загружаю данные из site_data.json..."
+python manage.py loaddata site_data.json
 
 # 5. Создать суперпользователя для /admin/, если его ещё нет
 #    (использует переменные DJANGO_SUPERUSER_* из окружения)
