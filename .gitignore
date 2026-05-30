@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Виртуальные окружения
+venv/
+.venv/
+env/
+
+# Django
+*.log
+staticfiles/
+# Локальная SQLite (на проде используется PostgreSQL)
+db.sqlite3
+db.sqlite3.backup
+
+# Загруженные пользователями файлы
+media/
+
+# Секреты
+.env
+*.env
+
+# ОС / редакторы
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Архивы
+*.rar
+*.zip

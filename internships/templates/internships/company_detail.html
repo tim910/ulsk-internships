@@ -1,0 +1,63 @@
+{% extends "internships/base.html" %}
+{% block title %}{{ company.name }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row g-4">
+    <div class="col-lg-4">
+      <div class="form-card text-center">
+        {% if company.logo %}
+          <img src="{{ company.logo.url }}" style="width:120px;height:120px;object-fit:contain;border-radius:16px;border:1px solid #e2e8f0" alt="">
+        {% else %}
+          <div class="company-logo-placeholder mx-auto" style="width:80px;height:80px;font-size:2rem">{{ company.name|first }}</div>
+        {% endif %}
+        <h2 class="h4 fw-bold mt-3">{{ company.name }}</h2>
+        <div class="text-muted small mb-2">{{ company.get_company_type_display }}</div>
+        {% if company.university %}
+          <div class="badge bg-warning text-dark mb-3"><i class="bi bi-mortarboard me-1"></i>{{ company.university.name }}</div>
+        {% endif %}
+        <p class="text-muted">{{ company.description }}</p>
+        {% if company.website %}
+          <a href="{{ company.website }}" target="_blank" class="btn btn-outline-primary w-100 mb-2">
+            <i class="bi bi-globe me-1"></i>Сайт компании
+          </a>
+        {% endif %}
+        {% if company.contact_email %}
+          <a href="mailto:{{ company.contact_email }}" class="btn btn-outline-secondary w-100">
+            <i class="bi bi-envelope me-1"></i>{{ company.contact_email }}
+          </a>
+        {% endif %}
+        {% if company.address %}
+          <div class="text-muted small mt-3"><i class="bi bi-geo-alt me-1"></i>{{ company.address }}</div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <h3 class="fw-bold mb-4">Активные стажировки ({{ internships|length }})</h3>
+      <div style="max-height:500px;overflow-y:auto;padding-right:10px">
+      {% for internship in internships %}
+      <div class="internship-card p-4 mb-3">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <h5 class="fw-bold mb-1">{{ internship.title }}</h5>
+            <div class="d-flex gap-2 mb-2">
+              <span class="badge-field">{{ internship.get_field_display }}</span>
+              <span class="badge-format badge-{{ internship.format }}">{{ internship.get_format_display }}</span>
+            </div>
+            <p class="text-muted small mb-2">{{ internship.description|truncatewords:25 }}</p>
+            {% if internship.stipend %}<small class="text-success fw-semibold">	<i class="bi bi-currency-ruble"></i>{{ internship.stipend }}</small>{% endif %}
+          </div>
+          <a href="{% url 'internship_detail' internship.pk %}" class="btn btn-primary btn-sm ms-3 flex-shrink-0">Подробнее</a>
+        </div>
+      </div>
+      {% empty %}
+      <div class="text-muted text-center py-4">
+        <i class="bi bi-briefcase" style="font-size:2rem"></i>
+        <p class="mt-2">Сейчас нет активных стажировок</p>
+      </div>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

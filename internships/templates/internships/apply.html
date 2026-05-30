@@ -1,0 +1,78 @@
+{% extends "internships/base.html" %}
+{% block title %}Подать заявку — {{ internship.title }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'internship_list' %}">Стажировки</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'internship_detail' internship.pk %}">{{ internship.title }}</a></li>
+          <li class="breadcrumb-item active">Подать заявку</li>
+        </ol>
+      </nav>
+
+      <!-- Info banner -->
+      <div class="alert alert-primary d-flex gap-3 align-items-start mb-4">
+        <i class="bi bi-briefcase-fill fs-4"></i>
+        <div>
+          <strong>{{ internship.title }}</strong><br>
+          <span class="text-muted">{{ internship.company.name }}</span>
+          {% if internship.stipend %}• <span class="text-success">{{ internship.stipend }}</span>{% endif %}
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h2 class="h4 fw-bold mb-1">Заявка на стажировку</h2>
+        <p class="text-muted mb-4">Заполните форму и приложите файл резюме.</p>
+
+        <form method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold"><i class="bi bi-file-earmark-pdf me-1 text-danger"></i>Резюме (PDF / DOCX)</label>
+            {{ form.resume_file }}
+            {% if form.resume_file.errors %}
+              <div class="text-danger small mt-1">{{ form.resume_file.errors }}</div>
+            {% endif %}
+          </div>
+
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+          {% endif %}
+
+          <hr class="my-4">
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Ваш вуз</label>
+              {{ form.university }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Курс / год обучения</label>
+              {{ form.course }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Телефон для связи</label>
+              {{ form.phone }}
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <label class="form-label">Сопроводительное письмо</label>
+            {{ form.cover_letter }}
+            <div class="form-text">Расскажите о своём опыте, навыках и мотивации. Это повышает шансы!</div>
+          </div>
+
+          <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">
+              <i class="bi bi-send me-2"></i>Отправить заявку
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

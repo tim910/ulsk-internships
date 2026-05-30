@@ -1,0 +1,81 @@
+{% extends "internships/base.html" %}
+{% block title %}Разместить стажировку{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h1 class="h3 fw-bold mb-1">Разместить стажировку</h1>
+      <p class="text-muted mb-4">Компания: <strong>{{ companies.first.name }}</strong></p>
+
+      <div class="form-card">
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label">Название стажировки *</label>
+              {{ form.title }}
+              {% if form.title.errors %}<div class="text-danger small">{{ form.title.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Направление *</label>
+              {{ form.field }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Формат работы *</label>
+              {{ form.format }}
+            </div>
+            <div class="col-12">
+              <label class="form-label">Описание стажировки *</label>
+              {{ form.description }}
+            </div>
+            <div class="col-12">
+              <label class="form-label">Задачи стажёра</label>
+              {{ form.tasks }}
+            </div>
+            <div class="col-12">
+              <label class="form-label">Требования к кандидату</label>
+              {{ form.requirements }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Продолжительность</label>
+              {{ form.duration }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Оплата / стипендия</label>
+              {{ form.stipend }}
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Количество мест</label>
+              {{ form.spots }}
+            </div>
+            <div class="col-md-8">
+              <label class="form-label">Дедлайн подачи заявок</label>
+              {{ form.deadline }}
+            </div>
+            <div class="col-12">
+              <label class="form-label">Предпочтение студентам вузов</label>
+              <div class="p-3 border rounded">
+                {% for checkbox in form.university_partnership %}
+                  <div class="form-check">
+                    {{ checkbox.tag }}
+                    <label class="form-check-label" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+                  </div>
+                {% endfor %}
+              </div>
+              <div class="form-text">Выберите вузы, студентам которых отдаётся предпочтение (необязательно)</div>
+            </div>
+          </div>
+
+          <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">
+              <i class="bi bi-plus-circle me-2"></i>Опубликовать стажировку
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

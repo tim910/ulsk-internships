@@ -1,0 +1,190 @@
+[
+  {
+    "model": "internships.university",
+    "pk": 1,
+    "fields": {
+      "name": "Ульяновский государственный технический университет",
+      "short_name": "УлГТУ",
+      "website": "https://ulstu.ru",
+      "description": "Крупнейший технический вуз Ульяновска. Готовит специалистов в области информационных технологий, автоматизации, радиотехники и связи.",
+      "it_directions": "Информатика и вычислительная техника, Программная инженерия, Информационная безопасность, Прикладная математика и информатика, Автоматизация технологических процессов, Радиотехника, Инфокоммуникационные технологии",
+      "logo": ""
+    }
+  },
+  {
+    "model": "internships.university",
+    "pk": 2,
+    "fields": {
+      "name": "Ульяновский государственный университет",
+      "short_name": "УлГУ",
+      "website": "https://ulsu.ru",
+      "description": "Классический университет с развитыми IT-направлениями. Имеет IT-факультет и математический факультет.",
+      "it_directions": "Прикладная математика и информатика, Информационные системы и технологии, Компьютерные науки, Математика и компьютерные науки, Фундаментальная информатика и информационные технологии",
+      "logo": ""
+    }
+  },
+  {
+    "model": "internships.university",
+    "pk": 3,
+    "fields": {
+      "name": "Ульяновский государственный педагогический университет им. И.Н. Ульянова",
+      "short_name": "УлГПУ",
+      "website": "https://ulspu.ru",
+      "description": "Педагогический университет с направлениями информатики и цифровых технологий в образовании.",
+      "it_directions": "Педагогическое образование (Информатика), Математика и информатика, Прикладная информатика",
+      "logo": ""
+    }
+  },
+  {
+    "model": "internships.university",
+    "pk": 4,
+    "fields": {
+      "name": "Ульяновское высшее авиационное училище гражданской авиации",
+      "short_name": "УВАУГА",
+      "website": "https://uvauga.ru",
+      "description": "Авиационный институт, ведущий подготовку специалистов в области информационных технологий для авиации.",
+      "it_directions": "Информационные системы и технологии (авиация), Автоматизация и управление, Техническое обслуживание авиационных систем",
+      "logo": ""
+    }
+  },
+  {
+    "model": "internships.university",
+    "pk": 5,
+    "fields": {
+      "name": "Ульяновский институт гражданской авиации им. Главного маршала авиации Б.П. Бугаева",
+      "short_name": "УИ ГА",
+      "website": "https://uiga.ru",
+      "description": "Специализированный институт ГА с IT-направлениями для авиационной отрасли.",
+      "it_directions": "Информационные технологии на воздушном транспорте, Системы автоматизации и управления",
+      "logo": ""
+    }
+  },
+  {
+    "model": "internships.company",
+    "pk": 1,
+    "fields": {
+      "name": "Контек-Софт",
+      "company_type": "commercial",
+      "university": null,
+      "description": "Один из крупнейших IT-работодателей Ульяновска. Разрабатывает промышленное ПО, ERP/MES-системы для машиностроения и авиации.",
+      "website": "https://kontek.ru",
+      "logo": "",
+      "contact_email": "hr@kontek.ru",
+      "address": "г. Ульяновск",
+      "owner": null,
+      "is_verified": true
+    }
+  },
+  {
+    "model": "internships.company",
+    "pk": 2,
+    "fields": {
+      "name": "Simbirsoft",
+      "company_type": "commercial",
+      "university": null,
+      "description": "Крупная аутсорсинговая IT-компания. Входит в топ-30 крупнейших IT-компаний России. Разработка ПО, мобильных и веб-приложений, QA, Data Science.",
+      "website": "https://simbirsoft.com",
+      "logo": "",
+      "contact_email": "career@simbirsoft.com",
+      "address": "г. Ульяновск, ул. Гончарова, 36",
+      "owner": null,
+      "is_verified": true
+    }
+  },
+  {
+    "model": "internships.company",
+    "pk": 3,
+    "fields": {
+      "name": "АйТи Ульяновск (IT72)",
+      "company_type": "commercial",
+      "university": null,
+      "description": "Региональная IT-компания, специализирующаяся на веб-разработке, мобильных приложениях и цифровой трансформации бизнеса.",
+      "website": "",
+      "logo": "",
+      "contact_email": "",
+      "address": "г. Ульяновск",
+      "owner": null,
+      "is_verified": true
+    }
+  },
+  {
+    "model": "internships.company",
+    "pk": 4,
+    "fields": {
+      "name": "Научно-образовательный центр УлГТУ",
+      "company_type": "university",
+      "university": 1,
+      "description": "Структурное подразделение УлГТУ, занимающееся прикладными исследованиями в области встраиваемых систем, САПР и промышленной автоматизации.",
+      "website": "https://ulstu.ru",
+      "logo": "",
+      "contact_email": "noc@ulstu.ru",
+      "address": "г. Ульяновск, ул. Северный Венец, 32",
+      "owner": null,
+      "is_verified": true
+    }
+  },
+  {
+    "model": "internships.company",
+    "pk": 5,
+    "fields": {
+      "name": "Центр инновационного развития УлГУ",
+      "company_type": "university",
+      "university": 2,
+      "description": "Инновационное подразделение УлГУ. Реализует проекты в области Data Science, искусственного интеллекта и веб-технологий совместно со студентами.",
+      "website": "https://ulsu.ru",
+      "logo": "",
+      "contact_email": "innovation@ulsu.ru",
+      "address": "г. Ульяновск, ул. Льва Толстого, 42",
+      "owner": null,
+      "is_verified": true
+    }
+  },
+  {
+    "model": "internships.company",
+    "pk": 6,
+    "fields": {
+      "name": "Корпорация развития Ульяновской области",
+      "company_type": "government",
+      "university": null,
+      "description": "Государственная структура, курирующая IT-кластер Ульяновска. Помогает стартапам и обеспечивает стажировки в IT-компаниях региона.",
+      "website": "https://ulkorporacia.ru",
+      "logo": "",
+      "contact_email": "it@ulkorporacia.ru",
+      "address": "г. Ульяновск, ул. Спасская, 5",
+      "owner": null,
+      "is_verified": true
+    }
+  },
+  {
+    "model": "internships.company",
+    "pk": 7,
+    "fields": {
+      "name": "Технопарк «Жигулёвская долина» (Ульяновский офис)",
+      "company_type": "startup",
+      "university": null,
+      "description": "Резиденты IT-акселератора. Стартапы в области fintech, edtech, logtech с офисами в Ульяновске.",
+      "website": "",
+      "logo": "",
+      "contact_email": "",
+      "address": "г. Ульяновск",
+      "owner": null,
+      "is_verified": true
+    }
+  },
+  {
+    "model": "internships.company",
+    "pk": 8,
+    "fields": {
+      "name": "НПО «Марс»",
+      "company_type": "commercial",
+      "university": 1,
+      "description": "Крупное оборонно-промышленное предприятие Ульяновска. Разрабатывает системы управления, встраиваемое ПО и навигационные системы для ВМФ.",
+      "website": "https://npomars.com",
+      "logo": "",
+      "contact_email": "hr@npomars.com",
+      "address": "г. Ульяновск, ул. Марса, 1",
+      "owner": null,
+      "is_verified": true
+    }
+  }
+]

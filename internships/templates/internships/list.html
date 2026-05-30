@@ -1,0 +1,109 @@
+{% extends "internships/base.html" %}
+{% block title %}Стажировки — IT Ульяновск{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row">
+    <!-- Фильтры -->
+    <div class="col-lg-3 mb-4">
+      <div class="form-card p-4">
+        <h5 class="fw-bold mb-3"><i class="bi bi-funnel me-2"></i>Фильтры</h5>
+        <form method="get">
+          <div class="mb-3">
+            <label class="form-label">Поиск</label>
+            {{ form.q }}
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Направление</label>
+            {{ form.field }}
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Формат работы</label>
+            {{ form.format }}
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Применить</button>
+          <a href="{% url 'internship_list' %}" class="btn btn-outline-secondary w-100 mt-2">Сбросить</a>
+        </form>
+      </div>
+    </div>
+
+    <!-- Список -->
+    <div class="col-lg-9">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h2 class="section-title mb-0">Стажировки</h2>
+          <p class="text-muted mb-0">Найдено: {{ page_obj.paginator.count }}</p>
+        </div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'post_internship' %}" class="btn btn-primary">
+          <i class="bi bi-plus-circle me-1"></i>Разместить
+        </a>
+        {% endif %}
+      </div>
+
+      <div class="row g-4">
+        {% for internship in page_obj %}
+        <div class="col-md-6 d-flex">
+          <div class="internship-card">
+            <div class="card-header d-flex align-items-center gap-3">
+              {% if internship.company.logo %}
+                <img src="{{ internship.company.logo.url }}" class="company-logo" alt="">
+              {% else %}
+                <div class="company-logo-placeholder">{{ internship.company.name|first }}</div>
+              {% endif %}
+              <div class="card-company-info">
+                <a href="{% url 'company_detail' internship.company.pk %}" class="card-company-name text-decoration-none text-dark">{{ internship.company.name }}</a>
+                {% if internship.company.university %}
+                  <small class="text-muted">{{ internship.company.university.short_name }}</small>
+                {% endif %}
+              </div>
+            </div>
+            <div class="card-body-content">
+              <h5 class="card-title-clamp">{{ internship.title }}</h5>
+              <div class="card-badges">
+                <span class="badge-field">{{ internship.get_field_display }}</span>
+                <span class="badge-format badge-{{ internship.format }}">{{ internship.get_format_display }}</span>
+              </div>
+              <p class="card-description-clamp">{{ internship.description|truncatewords:18 }}</p>
+              <div class="card-meta">
+                {% if internship.stipend %}
+                  <small class="text-success fw-semibold"><i class="bi bi-currency-ruble"></i>{{ internship.stipend }}</small>
+                {% else %}
+                  <small class="text-muted">—</small>
+                {% endif %}
+                {% if internship.deadline %}
+                  <span class="deadline-badge">до {{ internship.deadline|date:"d.m" }}</span>
+                {% endif %}
+              </div>
+              <a href="{% url 'internship_detail' internship.pk %}" class="btn btn-primary btn-sm w-100 card-action">Подробнее</a>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5 text-muted">
+          <i class="bi bi-search" style="font-size:3rem"></i>
+          <p class="mt-3">Ничего не найдено. Попробуйте изменить фильтры.</p>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Pagination -->
+      {% if page_obj.has_other_pages %}
+      <nav class="mt-4">
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1{% for key,value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Первая</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% for key,value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">‹</a></li>
+          {% endif %}
+          <li class="page-item disabled"><span class="page-link">Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span></li>
+          {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% for key,value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">›</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% for key,value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">Последняя</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

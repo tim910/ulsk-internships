@@ -1,0 +1,34 @@
+# Blueprint для Render: веб-сервис (Django + Gunicorn) + база PostgreSQL.
+# Render прочитает этот файл и создаст оба ресурса автоматически.
+services:
+  - type: web
+    name: ulsk-internships
+    runtime: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn ulsk_internships.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.4"
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true            # Render сгенерирует случайный ключ
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ulsk-db
+          property: connectionString
+      # Данные для автосоздания администратора (для входа в /admin/).
+      # Поменяй пароль на свой в дашборде Render после первого деплоя.
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: admin
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: admin@example.com
+      - key: DJANGO_SUPERUSER_PASSWORD
+        generateValue: true
+
+databases:
+  - name: ulsk-db
+    plan: free
+    databaseName: ulsk_internships
+    user: ulsk

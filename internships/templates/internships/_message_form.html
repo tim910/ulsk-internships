@@ -1,0 +1,10 @@
+{% load static %}
+<form method="post" action="{% url 'send_application_message' app.pk %}">
+  {% csrf_token %}
+  <textarea name="message" class="form-control" rows="3" placeholder="{{ placeholder }}" required>{{ app.company_message }}</textarea>
+  <div class="d-flex gap-2 mt-2">
+    <button type="submit" class="btn btn-warning btn-sm fw-bold">
+      <i class="bi bi-send me-1"></i>{{ submit_label }}
+    </button>
+  </div>
+</form>

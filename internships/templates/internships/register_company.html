@@ -1,0 +1,30 @@
+{% extends "internships/base.html" %}
+{% block title %}Регистрация компании{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <h1 class="h3 fw-bold mb-1">{% if existing %}Редактировать профиль компании{% else %}Зарегистрировать компанию{% endif %}</h1>
+      <p class="text-muted mb-4">После регистрации модератор проверит данные и активирует профиль</p>
+
+      <div class="form-card">
+        <form method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+          {% for field in form %}
+          <div class="mb-3">
+            <label class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+            {% if field.errors %}<div class="text-danger small">{{ field.errors }}</div>{% endif %}
+          </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-primary w-100 btn-lg">
+            <i class="bi bi-building-check me-2"></i>Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

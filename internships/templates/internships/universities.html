@@ -1,0 +1,47 @@
+{% extends "internships/base.html" %}
+{% block title %}Вузы Ульяновска — IT направления{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">Вузы Ульяновска с IT направлениями</h1>
+  <p class="section-subtitle">Университеты-партнёры платформы</p>
+
+  <div class="row g-4">
+    {% for uni in universities %}
+    <div class="col-md-6">
+      <div class="uni-card h-100">
+        <div class="d-flex align-items-start gap-3">
+          {% if uni.logo %}
+            <img src="{{ uni.logo.url }}" style="width:64px;height:64px;object-fit:contain" alt="">
+          {% else %}
+            <div class="uni-abbr" style="min-width:64px">{{ uni.short_name }}</div>
+          {% endif %}
+          <div>
+            <div class="fw-bold" style="font-size:1rem">{{ uni.name }}</div>
+            {% if uni.companies_count %}
+              <div class="badge bg-primary mt-1">{{ uni.companies_count }} компаний-партнёров</div>
+            {% endif %}
+          </div>
+        </div>
+        {% if uni.description %}
+          <p class="text-muted small mt-3 mb-2">{{ uni.description }}</p>
+        {% endif %}
+        {% if uni.it_directions %}
+          <div class="mt-2">
+            <strong class="small">IT направления:</strong>
+            <p class="text-muted small mb-0">{{ uni.it_directions }}</p>
+          </div>
+        {% endif %}
+        {% if uni.website %}
+          <div class="text-center mt-3">
+            <a href="{{ uni.website }}" target="_blank" class="btn btn-sm btn-outline-primary w-auto">
+              <i class="bi bi-globe me-1"></i>Сайт вуза
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

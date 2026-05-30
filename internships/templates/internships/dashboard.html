@@ -1,0 +1,291 @@
+{% extends "internships/base.html" %}
+{% block title %}Личный кабинет — {{ profile_user.first_name|default:profile_user.username }}{% endblock %}
+
+{% block content %}
+<div class="cabinet-hero">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-md-auto">
+        <div class="cabinet-avatar">
+          {{ profile_user.first_name|default:profile_user.username|first|upper }}
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="cabinet-name">
+          {{ profile_user.first_name|default:'' }} {{ profile_user.last_name|default:'' }}
+          {% if not profile_user.first_name and not profile_user.last_name %}
+            {{ profile_user.username }}
+          {% endif %}
+        </div>
+        <div class="cabinet-meta">
+          <span><i class="bi bi-person me-1"></i>@{{ profile_user.username }}</span>
+          {% if profile_user.email %}
+            <span><i class="bi bi-envelope me-1"></i>{{ profile_user.email }}</span>
+          {% endif %}
+          <span><i class="bi bi-calendar-check me-1"></i>На сайте с {{ profile_user.date_joined|date:"d.m.Y" }}</span>
+        </div>
+        {% if company %}
+          <div class="cabinet-role mt-2">
+            <i class="bi bi-building me-1"></i>Владелец компании — <strong>{{ company.name }}</strong>
+            {% if company.is_verified %}
+              <span class="badge bg-success ms-2"><i class="bi bi-patch-check-fill me-1"></i>Проверена</span>
+            {% else %}
+              <span class="badge bg-warning text-dark ms-2"><i class="bi bi-hourglass-split me-1"></i>На проверке</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="col-md-auto">
+        <a href="{% url 'profile_edit' %}" class="btn btn-light fw-semibold">
+          <i class="bi bi-pencil-square me-1"></i>Редактировать
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container py-5">
+
+  <!-- Stats applicant -->
+  <h2 class="section-title">Мои заявки</h2>
+  <p class="section-subtitle">Сводка по поданным заявкам на стажировки</p>
+  <div class="row g-3 mb-5">
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="cabinet-stat">
+        <div class="cabinet-stat-num">{{ applications_total }}</div>
+        <div class="cabinet-stat-label">Всего</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="cabinet-stat cabinet-stat--pending">
+        <div class="cabinet-stat-num">{{ status_counts.pending }}</div>
+        <div class="cabinet-stat-label">На рассмотрении</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="cabinet-stat cabinet-stat--reviewing">
+        <div class="cabinet-stat-num">{{ status_counts.reviewing }}</div>
+        <div class="cabinet-stat-label">Изучается</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="cabinet-stat cabinet-stat--interview">
+        <div class="cabinet-stat-num">{{ status_counts.interview }}</div>
+        <div class="cabinet-stat-label">Интервью</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="cabinet-stat cabinet-stat--accepted">
+        <div class="cabinet-stat-num">{{ status_counts.accepted }}</div>
+        <div class="cabinet-stat-label">Принят</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-2">
+      <div class="cabinet-stat cabinet-stat--rejected">
+        <div class="cabinet-stat-num">{{ status_counts.rejected }}</div>
+        <div class="cabinet-stat-label">Отказ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent applications -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="h5 fw-bold mb-0"><i class="bi bi-file-text me-2 text-primary"></i>Последние заявки</h3>
+    {% if applications_total > 0 %}
+      <a href="{% url 'my_applications' %}" class="btn btn-sm btn-outline-primary">Все заявки <i class="bi bi-arrow-right ms-1"></i></a>
+    {% endif %}
+  </div>
+
+  {% if applications %}
+    <div class="row g-3 mb-5">
+      {% for app in applications %}
+        <div class="col-md-6">
+          <div class="cabinet-app-card">
+            <div class="d-flex justify-content-between align-items-start gap-3">
+              <div class="flex-grow-1">
+                <div class="fw-bold">{{ app.internship.title }}</div>
+                <div class="text-muted small"><i class="bi bi-building me-1"></i>{{ app.internship.company.name }}</div>
+                <div class="text-muted small mt-1"><i class="bi bi-calendar me-1"></i>{{ app.created_at|date:"d.m.Y H:i" }}</div>
+              </div>
+              <span class="badge status-{{ app.status }} rounded-pill px-3 py-2">{{ app.get_status_display }}</span>
+            </div>
+            <a href="{% url 'internship_detail' app.internship.pk %}" class="stretched-link"></a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="cabinet-empty mb-5">
+      <i class="bi bi-file-earmark-text"></i>
+      <p>Вы ещё не подавали заявок.</p>
+      <a href="{% url 'internship_list' %}" class="btn btn-warning btn-sm fw-bold">
+        <i class="bi bi-search me-1"></i>Найти стажировку
+      </a>
+    </div>
+  {% endif %}
+
+  <!-- Company section -->
+  {% if company %}
+    <h2 class="section-title mt-4">Моя компания</h2>
+    <p class="section-subtitle">Управление стажировками и входящими заявками</p>
+
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3">
+        <div class="cabinet-stat">
+          <div class="cabinet-stat-num">{{ company_internships_count }}</div>
+          <div class="cabinet-stat-label">Стажировок</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="cabinet-stat">
+          <div class="cabinet-stat-num">{{ incoming_apps_total }}</div>
+          <div class="cabinet-stat-label">Заявок получено</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="cabinet-stat cabinet-stat--pending">
+          <div class="cabinet-stat-num">{{ incoming_status_counts.pending }}</div>
+          <div class="cabinet-stat-label">Новых</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="cabinet-stat cabinet-stat--accepted">
+          <div class="cabinet-stat-num">{{ incoming_status_counts.accepted }}</div>
+          <div class="cabinet-stat-label">Принято</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+      <div class="col-lg-7">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3 class="h5 fw-bold mb-0"><i class="bi bi-briefcase me-2 text-primary"></i>Опубликованные стажировки</h3>
+          <a href="{% url 'post_internship' %}" class="btn btn-sm btn-warning fw-bold">
+            <i class="bi bi-plus-circle me-1"></i>Добавить
+          </a>
+        </div>
+        {% if company_internships %}
+          <div class="d-flex flex-column gap-2">
+            {% for ints in company_internships|slice:":5" %}
+              <a href="{% url 'internship_detail' ints.pk %}" class="cabinet-list-row">
+                <div class="d-flex justify-content-between align-items-center gap-3">
+                  <div>
+                    <div class="fw-semibold">{{ ints.title }}</div>
+                    <small class="text-muted">
+                      <span class="badge-field me-2">{{ ints.get_field_display }}</span>
+                      <i class="bi bi-people me-1"></i>{{ ints.apps_count }} заявок
+                    </small>
+                  </div>
+                  {% if ints.is_active %}
+                    <span class="badge bg-success-subtle text-success border border-success-subtle">Активна</span>
+                  {% else %}
+                    <span class="badge bg-secondary-subtle text-secondary border">Скрыта</span>
+                  {% endif %}
+                </div>
+              </a>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="cabinet-empty">
+            <i class="bi bi-briefcase"></i>
+            <p>Стажировки ещё не опубликованы.</p>
+            <a href="{% url 'post_internship' %}" class="btn btn-warning btn-sm fw-bold">Разместить первую</a>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="col-lg-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3 class="h5 fw-bold mb-0"><i class="bi bi-inbox me-2 text-primary"></i>Входящие заявки</h3>
+          {% if incoming_apps_total > 0 %}
+            <a href="{% url 'company_applications' %}" class="btn btn-sm btn-outline-primary">Все</a>
+          {% endif %}
+        </div>
+        {% if incoming_apps %}
+          <div class="d-flex flex-column gap-2">
+            {% for app in incoming_apps %}
+              <div class="cabinet-list-row">
+                <div class="d-flex justify-content-between align-items-start gap-2">
+                  <div>
+                    <div class="fw-semibold">{{ app.applicant.get_full_name|default:app.applicant.username }}</div>
+                    <small class="text-muted text-clamp-3 d-block">{{ app.internship.title }}</small>
+                  </div>
+                  <span class="badge status-{{ app.status }} rounded-pill px-2">{{ app.get_status_display }}</span>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="cabinet-empty">
+            <i class="bi bi-inbox"></i>
+            <p class="mb-0">Заявок пока нет.</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Quick actions -->
+  <h2 class="section-title mt-4">Быстрые действия</h2>
+  <p class="section-subtitle">Часто используемые разделы</p>
+  <div class="row g-3">
+    <div class="col-6 col-md-4 col-lg-3">
+      <a href="{% url 'internship_list' %}" class="cabinet-action">
+        <i class="bi bi-search"></i>
+        <span>Найти стажировку</span>
+      </a>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <a href="{% url 'my_applications' %}" class="cabinet-action">
+        <i class="bi bi-file-text"></i>
+        <span>Мои заявки</span>
+      </a>
+    </div>
+    {% if company %}
+      <div class="col-6 col-md-4 col-lg-3">
+        <a href="{% url 'post_internship' %}" class="cabinet-action">
+          <i class="bi bi-plus-circle"></i>
+          <span>Разместить стажировку</span>
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <a href="{% url 'company_applications' %}" class="cabinet-action">
+          <i class="bi bi-people"></i>
+          <span>Заявки в компанию</span>
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <a href="{% url 'register_company' %}" class="cabinet-action">
+          <i class="bi bi-building-gear"></i>
+          <span>Профиль компании</span>
+        </a>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <a href="{% url 'company_detail' company.pk %}" class="cabinet-action">
+          <i class="bi bi-eye"></i>
+          <span>Страница компании</span>
+        </a>
+      </div>
+    {% else %}
+      <div class="col-6 col-md-4 col-lg-3">
+        <a href="{% url 'register_company' %}" class="cabinet-action">
+          <i class="bi bi-building-add"></i>
+          <span>Зарегистрировать компанию</span>
+        </a>
+      </div>
+    {% endif %}
+    <div class="col-6 col-md-4 col-lg-3">
+      <a href="{% url 'profile_edit' %}" class="cabinet-action">
+        <i class="bi bi-pencil-square"></i>
+        <span>Редактировать профиль</span>
+      </a>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <a href="{% url 'logout' %}" class="cabinet-action cabinet-action--danger">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Выйти</span>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

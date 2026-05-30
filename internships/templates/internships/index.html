@@ -1,0 +1,176 @@
+{% extends "internships/base.html" %}
+{% load static %}
+{% block title %}IT Стажировки Ульяновска — Главная{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h1>Найди IT-стажировку<br>в Ульяновске</h1>
+        <p class="mt-3">Стажировки в ведущих IT-компаниях и tech-подразделениях вузов для студентов УлГТУ, УлГУ, УлГПУ и других университетов.</p>
+        <div class="d-flex gap-3 mt-4 flex-wrap">
+          <a href="{% url 'internship_list' %}" class="btn btn-warning btn-lg fw-bold">
+            <i class="bi bi-search me-2"></i>Найти стажировку
+          </a>
+          <a href="{% url 'post_internship' %}" class="btn btn-outline-light btn-lg">
+            <i class="bi bi-plus-circle me-2"></i>Разместить вакансию
+          </a>
+        </div>
+        <div class="row g-3 mt-4">
+          <div class="col-4">
+            <div class="stat-card">
+              <div class="number">{{ stats.internships }}</div>
+              <div class="label">Стажировок</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="stat-card">
+              <div class="number">{{ stats.companies }}</div>
+              <div class="label">Компаний</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="stat-card">
+              <div class="number">{{ stats.universities }}</div>
+              <div class="label">Вузов</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 mt-5 mt-lg-0">
+        <div class="hero-illustration text-center">
+          <img src="{% static 'images/where-to-find.png' %}" alt="Где найти IT-стажировку в Ульяновске" class="img-fluid">
+          <div class="hero-caption mt-3">
+            <i class="bi bi-geo-alt-fill text-warning me-1"></i>
+            <span>Где найти IT-стажировку в Ульяновске</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Актуальные стажировки -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-title">Актуальные стажировки</h2>
+    <p class="section-subtitle">Свежие возможности от IT-компаний Ульяновска</p>
+        <div class="row g-4">
+          {% for internship in internships %}
+          <div class="col-md-6 col-lg-3 d-flex">
+            <div class="internship-card">
+              <div class="card-header d-flex align-items-center gap-3">
+                {% if internship.company.logo %}
+                  <img src="{{ internship.company.logo.url }}" class="company-logo" alt="{{ internship.company.name }}">
+                {% else %}
+                  <div class="company-logo-placeholder">{{ internship.company.name|first }}</div>
+                {% endif %}
+                <div class="card-company-info">
+                  <div class="card-company-name">{{ internship.company.name }}</div>
+                  {% if internship.company.university %}
+                    <small class="text-muted"><i class="bi bi-mortarboard me-1"></i>{{ internship.company.university.short_name }}</small>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="card-body-content">
+                <h5 class="card-title-clamp">{{ internship.title }}</h5>
+                <div class="card-badges">
+                  <span class="badge-field">{{ internship.get_field_display }}</span>
+                  <span class="badge-format badge-{{ internship.format }}">{{ internship.get_format_display }}</span>
+                </div>
+                <p class="card-description-clamp">{{ internship.description|truncatewords:20 }}</p>
+                <div class="card-meta">
+                  <div>
+                    {% if internship.stipend %}
+                      <small class="text-success fw-semibold"><i class="bi bi-currency-ruble"></i> {{ internship.stipend }}</small>
+                    {% else %}
+                      <small class="text-muted">Оплата не указана</small>
+                    {% endif %}
+                  </div>
+                  {% if internship.deadline %}
+                    <span class="deadline-badge"><i class="bi bi-clock me-1"></i>до {{ internship.deadline|date:"d.m.Y" }}</span>
+                  {% endif %}
+                </div>
+                <a href="{% url 'internship_detail' internship.pk %}" class="btn btn-primary btn-sm w-100 card-action">Подробнее</a>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="col-12 text-center text-muted py-4">
+            <i class="bi bi-briefcase" style="font-size:3rem"></i>
+            <p class="mt-2">Стажировки ещё не добавлены. <a href="{% url 'post_internship' %}">Разместите первую!</a></p>
+          </div>
+          {% endfor %}
+        </div>
+    {% if internships %}
+    <div class="text-center mt-4">
+      <a href="{% url 'internship_list' %}" class="btn btn-outline-primary">Смотреть все стажировки <i class="bi bi-arrow-right ms-1"></i></a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Вузы -->
+<section class="py-5" style="background:#f1f5f9">
+  <div class="container">
+    <h2 class="section-title">Вузы Ульяновска с IT направлениями</h2>
+    <p class="section-subtitle">Университеты-партнёры платформы</p>
+    <div class="row g-4">
+      {% for uni in universities %}
+      <div class="col-md-6 col-lg-3">
+        <div class="uni-card text-center">
+          {% if uni.logo %}
+            <img src="{{ uni.logo.url }}" class="uni-logo mx-auto mb-2" alt="{{ uni.short_name }}">
+          {% else %}
+            <div class="uni-abbr mx-auto mb-2" style="width:64px;height:64px;display:flex;align-items:center;justify-content:center;border-radius:12px">{{ uni.short_name }}</div>
+          {% endif %}
+          <div class="fw-semibold mt-1" style="font-size:0.9rem">{{ uni.name|truncatewords:5 }}</div>
+          {% if uni.it_directions %}
+            <p class="text-muted small mt-2 mb-1 text-clamp-3">{{ uni.it_directions|truncatewords:10 }}</p>
+          {% endif %}
+          {% if uni.website %}
+            <a href="{{ uni.website }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Сайт вуза</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Компании -->
+{% if companies %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-title">IT-компании Ульяновска</h2>
+    <p class="section-subtitle">Работодатели, размещающие стажировки</p>
+    <div class="row g-4">
+      {% for company in companies %}
+      <div class="col-md-6 col-lg-3">
+        <a href="{% url 'company_detail' company.pk %}" class="text-decoration-none">
+          <div class="company-card">
+            {% if company.logo %}
+              <img src="{{ company.logo.url }}" style="height:50px;object-fit:contain" alt="{{ company.name }}">
+            {% else %}
+              <div style="font-size:2rem;font-weight:800;color:var(--primary)">{{ company.name|first }}</div>
+            {% endif %}
+            <div class="fw-semibold mt-2 text-dark text-clamp-3" style="font-size:0.9rem">{{ company.name }}</div>
+            {% if company.university %}
+              <small class="text-muted">{{ company.university.short_name }}</small>
+            {% endif %}
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-4">
+      <a href="{% url 'company_list' %}" class="btn btn-outline-primary">Все компании <i class="bi bi-arrow-right ms-1"></i></a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+
+{% endblock %}

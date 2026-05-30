@@ -1,0 +1,50 @@
+{% extends "internships/base.html" %}
+{% block title %}Мои заявки{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h1 class="h3 fw-bold mb-4">Мои заявки</h1>
+
+  {% if applications %}
+  <div class="row g-4">
+    {% for app in applications %}
+    <div class="col-md-6">
+      <div class="form-card h-100 application-card">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <div>
+            <h5 class="fw-bold mb-1">{{ app.internship.title }}</h5>
+            <div class="text-muted small">{{ app.internship.company.name }}</div>
+          </div>
+          <span class="badge status-{{ app.status }} rounded-pill px-3 py-2">{{ app.get_status_display }}</span>
+        </div>
+        <div class="d-flex flex-wrap gap-3 text-muted small mt-3">
+          {% if app.resume_file %}
+            <a href="{{ app.resume_file.url }}" target="_blank"><i class="bi bi-file-earmark-pdf text-danger me-1"></i>Файл</a>
+          {% endif %}
+          <span><i class="bi bi-calendar me-1"></i>{{ app.created_at|date:"d.m.Y" }}</span>
+        </div>
+
+        {% if app.company_message %}
+        <div class="company-message mt-3">
+          <div class="company-message-header">
+            <i class="bi bi-chat-square-text-fill me-1"></i>
+            <span class="fw-semibold">Сообщение от компании</span>
+            {% if app.company_message_at %}
+              <small class="text-muted ms-auto">{{ app.company_message_at|date:"d.m.Y H:i" }}</small>
+            {% endif %}
+          </div>
+          <div class="company-message-body">{{ app.company_message|linebreaksbr }}</div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="text-center text-muted py-5">
+    <i class="bi bi-file-text" style="font-size:3rem"></i>
+    <p class="mt-3">Вы ещё не подавали заявок. <a href="{% url 'internship_list' %}">Найдите стажировку!</a></p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
