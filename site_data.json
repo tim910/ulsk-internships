@@ -1,0 +1,488 @@
+[
+{
+  "model": "internships.university",
+  "pk": 1,
+  "fields": {
+    "name": "Ульяновский государственный технический университет",
+    "short_name": "УлГТУ",
+    "website": "https://ulstu.ru",
+    "description": "Крупнейший технический вуз Ульяновска. Готовит специалистов в области ИТ, автоматизации, радиотехники и связи.",
+    "it_directions": "Информатика и ВТ, Программная инженерия, Информационная безопасность, Прикладная математика и информатика, Автоматизация ТП, Радиотехника, Инфокоммуникационные технологии",
+    "logo": "universities/3.webp"
+  }
+},
+{
+  "model": "internships.university",
+  "pk": 2,
+  "fields": {
+    "name": "Ульяновский государственный университет",
+    "short_name": "УлГУ",
+    "website": "https://ulsu.ru",
+    "description": "Классический университет с развитыми IT-направлениями. Математический факультет и факультет информационных технологий.",
+    "it_directions": "Прикладная математика и информатика, Информационные системы и технологии, Компьютерные науки, Математика и компьютерные науки",
+    "logo": "universities/4.webp"
+  }
+},
+{
+  "model": "internships.university",
+  "pk": 3,
+  "fields": {
+    "name": "Ульяновский государственный педагогический университет им. И.Н. Ульянова",
+    "short_name": "УлГПУ",
+    "website": "https://ulspu.ru",
+    "description": "Педагогический университет с направлениями информатики и цифровых технологий в образовании.",
+    "it_directions": "Педагогическое образование (Информатика), Математика и информатика, Прикладная информатика",
+    "logo": "universities/2.webp"
+  }
+},
+{
+  "model": "internships.university",
+  "pk": 4,
+  "fields": {
+    "name": "Ульяновское высшее авиационное училище гражданской авиации",
+    "short_name": "УВАУГА",
+    "website": "https://uvauga.ru",
+    "description": "Авиационный институт, готовящий специалистов в том числе в области IT для авиации.",
+    "it_directions": "Информационные системы и технологии (авиация), Автоматизация и управление",
+    "logo": "universities/1.webp"
+  }
+},
+{
+  "model": "internships.university",
+  "pk": 5,
+  "fields": {
+    "name": "Ульяновский институт гражданской авиации им. Б.П. Бугаева",
+    "short_name": "УИ ГА",
+    "website": "https://uiga.ru",
+    "description": "Специализированный институт ГА с IT-направлениями для авиационной отрасли.",
+    "it_directions": "Информационные технологии на воздушном транспорте, Системы автоматизации и управления",
+    "logo": "universities/1_nMKstuy.webp"
+  }
+},
+{
+  "model": "internships.internship",
+  "pk": 1,
+  "fields": {
+    "company": 2,
+    "title": "Backend-разработчик (Python/Django)",
+    "field": "backend",
+    "description": "Приглашаем студентов на стажировку в команду backend-разработки. Работа над реальными коммерческими проектами под руководством опытных разработчиков.\n\nSimbirsoft входит в топ-30 крупнейших IT-компаний России.",
+    "image": "",
+    "requirements": "- Знание Python на базовом/среднем уровне\n- Понимание основ веб-разработки (HTTP, REST API)\n- Базовые знания SQL\n- Желание учиться",
+    "tasks": "- Разработка REST API на Django/DRF\n- Написание unit-тестов\n- Участие в код-ревью\n- Работа с PostgreSQL",
+    "format": "hybrid",
+    "duration": "3 месяца",
+    "stipend": "25 000 руб/мес",
+    "spots": 3,
+    "is_active": true,
+    "deadline": "2025-08-01",
+    "created_at": "2026-05-01T08:08:56.553Z",
+    "updated_at": "2026-05-01T08:08:56.553Z",
+    "university_partnership": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "internships.internship",
+  "pk": 2,
+  "fields": {
+    "company": 2,
+    "title": "Frontend-разработчик (React)",
+    "field": "frontend",
+    "description": "Стажировка в команде frontend-разработки. Работа над современными веб-интерфейсами для крупных российских заказчиков.",
+    "image": "",
+    "requirements": "- Знание HTML/CSS, JavaScript\n- Базовое знание React\n- Понимание адаптивной вёрстки\n- Опыт с Git",
+    "tasks": "- Вёрстка компонентов на React\n- Интеграция с backend API\n- Участие в проектировании UI/UX",
+    "format": "office",
+    "duration": "2-3 месяца",
+    "stipend": "20 000 руб/мес",
+    "spots": 2,
+    "is_active": true,
+    "deadline": "2025-07-15",
+    "created_at": "2026-05-01T08:08:56.558Z",
+    "updated_at": "2026-05-01T08:08:56.558Z",
+    "university_partnership": [
+      3,
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "internships.internship",
+  "pk": 4,
+  "fields": {
+    "company": 5,
+    "title": "Data Science / ML стажёр",
+    "field": "data",
+    "description": "Стажировка в Центре инновационного развития УлГУ. Работа над исследовательскими проектами в области машинного обучения.",
+    "image": "",
+    "requirements": "- Знание Python (pandas, numpy, sklearn)\n- Базовые знания математической статистики\n- Студент 3+ курса",
+    "tasks": "- Сбор и обработка данных\n- Построение и обучение ML-моделей\n- Визуализация результатов",
+    "format": "hybrid",
+    "duration": "4 месяца",
+    "stipend": "15 000 руб/мес",
+    "spots": 3,
+    "is_active": true,
+    "deadline": "2025-09-01",
+    "created_at": "2026-05-01T08:08:56.567Z",
+    "updated_at": "2026-05-01T08:08:56.567Z",
+    "university_partnership": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "internships.internship",
+  "pk": 5,
+  "fields": {
+    "company": 4,
+    "title": "Инженер по тестированию ПО (QA)",
+    "field": "qa",
+    "description": "Стажировка в НОЦ УлГТУ по тестированию программного обеспечения. Участие в реальных проектах для промышленных предприятий.",
+    "image": "",
+    "requirements": "- Базовое понимание процессов разработки ПО\n- Внимательность и аналитическое мышление\n- Студент любого курса IT-специальности",
+    "tasks": "- Ручное тестирование ПО\n- Составление тест-кейсов и баг-репортов\n- Освоение инструментов автотестирования",
+    "format": "office",
+    "duration": "3 месяца",
+    "stipend": "Не оплачивается (зачёт практики)",
+    "spots": 4,
+    "is_active": true,
+    "deadline": "2025-08-15",
+    "created_at": "2026-05-01T08:08:56.571Z",
+    "updated_at": "2026-05-01T08:08:56.571Z",
+    "university_partnership": [
+      3,
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "internships.internship",
+  "pk": 6,
+  "fields": {
+    "company": 8,
+    "title": "Разработчик навигационных систем (Python/C++)",
+    "field": "backend",
+    "description": "НПО «Марс» приглашает студентов на стажировку в отдел разработки ПО для навигационных и управляющих систем.",
+    "image": "",
+    "requirements": "- Гражданство РФ (обязательно)\n- Знание Python или C++\n- Базовые знания алгоритмов\n- Студент 3-5 курса УлГТУ",
+    "tasks": "- Разработка алгоритмов обработки сигналов\n- Тестирование и верификация ПО\n- Работа с документацией по ГОСТ",
+    "format": "office",
+    "duration": "6 месяцев",
+    "stipend": "35 000 руб/мес",
+    "spots": 2,
+    "is_active": true,
+    "deadline": "2025-07-01",
+    "created_at": "2026-05-01T08:08:56.576Z",
+    "updated_at": "2026-05-01T08:08:56.576Z",
+    "university_partnership": [
+      1
+    ]
+  }
+},
+{
+  "model": "internships.internship",
+  "pk": 7,
+  "fields": {
+    "company": 2,
+    "title": "Мобильный разработчик (Android / Kotlin)",
+    "field": "mobile",
+    "description": "Стажировка в команде мобильной разработки Simbirsoft. Работа над Android-приложениями для клиентов из банковской и retail-сферы.",
+    "image": "",
+    "requirements": "- Знание Kotlin или Java\n- Базовое понимание Android SDK\n- Желание развиваться в мобильной разработке",
+    "tasks": "- Разработка UI компонентов\n- Интеграция с REST API\n- Написание unit-тестов",
+    "format": "office",
+    "duration": "3 месяца",
+    "stipend": "22 000 руб/мес",
+    "spots": 2,
+    "is_active": true,
+    "deadline": "2025-08-20",
+    "created_at": "2026-05-01T08:08:56.580Z",
+    "updated_at": "2026-05-01T08:08:56.580Z",
+    "university_partnership": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "internships.internship",
+  "pk": 8,
+  "fields": {
+    "company": 5,
+    "title": "Веб-разработчик (Django + Vue.js)",
+    "field": "fullstack",
+    "description": "Удалённая стажировка в ЦИР УлГУ. Разработка образовательных веб-платформ для университета.",
+    "image": "",
+    "requirements": "- Знание Python/Django или Vue.js\r\n- Базовое знание HTML/CSS\r\n- Студент 2+ курса",
+    "tasks": "- Разработка функционала веб-приложения\r\n- Работа с базами данных\r\n- Тестирование и документирование",
+    "format": "remote",
+    "duration": "3 месяца",
+    "stipend": "18 000 руб/мес",
+    "spots": 2,
+    "is_active": true,
+    "deadline": "2025-09-15",
+    "created_at": "2026-05-01T08:08:56.584Z",
+    "updated_at": "2026-05-15T10:18:58.241Z",
+    "university_partnership": [
+      3,
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "internships.internship",
+  "pk": 11,
+  "fields": {
+    "company": 12,
+    "title": "Frontend-разработчик (React / TypeScript)",
+    "field": "frontend",
+    "description": "Стажировка в команде frontend MediaSoft. Работа над интерфейсами b2b-продуктов и проектов для enterprise-заказчиков. Реальные задачи, менторство опытных разработчиков, понятный план обучения.",
+    "image": "",
+    "requirements": "- Уверенные HTML, CSS, JavaScript\n- Базовый React и TypeScript\n- Опыт работы с Git\n- Студент 3+ курса IT-направления",
+    "tasks": "- Разработка компонентов UI на React\n- Интеграция с REST API\n- Покрытие кода тестами (Jest)\n- Участие в код-ревью и спринт-планировании",
+    "format": "hybrid",
+    "duration": "3 месяца",
+    "stipend": "30 000 руб/мес",
+    "spots": 2,
+    "is_active": true,
+    "deadline": "2026-08-01",
+    "created_at": "2026-05-15T10:30:38.425Z",
+    "updated_at": "2026-05-15T10:30:38.425Z",
+    "university_partnership": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "internships.internship",
+  "pk": 12,
+  "fields": {
+    "company": 13,
+    "title": "Backend-стажёр (Java / Spring Boot)",
+    "field": "backend",
+    "description": "Приглашаем студентов в ульяновский офис ITECH.group на позицию backend-стажёра. Реальные коммерческие проекты для крупных заказчиков, обучение enterprise-стеку Java/Spring под руководством senior-разработчиков.",
+    "image": "",
+    "requirements": "- Знание Java на базовом уровне\r\n- Понимание ООП и базовых алгоритмов\r\n- Базовый SQL\r\n- Желание расти в enterprise-разработке",
+    "tasks": "- Реализация бизнес-логики на Spring Boot\r\n- Работа с PostgreSQL / Oracle\r\n- Написание unit- и интеграционных тестов\r\n- Участие в проектных митингах и груминге",
+    "format": "office",
+    "duration": "4 месяца",
+    "stipend": "35 000 руб/мес",
+    "spots": 3,
+    "is_active": true,
+    "deadline": "2026-09-15",
+    "created_at": "2026-05-15T10:30:38.437Z",
+    "updated_at": "2026-05-21T06:09:33.894Z",
+    "university_partnership": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$XNVYUACoPelSFxOxWNs1wE$0Y/GjhbdnIckj2FC5m01fONta+lkXxZW0c00NSb/dOE=",
+    "last_login": "2026-05-30T15:15:29.893Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "Дима",
+    "last_name": "Никифоров",
+    "email": "admin@ulsk-it.ru",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-05-01T08:09:02.318Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$oVOwqvoU3q0P6VHsWTJYel$PCnlsG4+hDr/RYwm7+wmyTgRgZm3UvNPKY9doNcXAMQ=",
+    "last_login": "2026-05-01T08:20:28.690Z",
+    "is_superuser": false,
+    "username": "fdsf",
+    "first_name": "sdfdsf",
+    "last_name": "dfsdsf",
+    "email": "gusev@ulstu.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-01T08:20:28.489Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$fRXXDiDVqsZ4kw3Hh5jfo3$xdt793RB+CLzI3hGA4om/lCSATUjweShsnZERxOCoiY=",
+    "last_login": "2026-05-21T16:30:54.643Z",
+    "is_superuser": false,
+    "username": "timur",
+    "first_name": "Тимур",
+    "last_name": "ww",
+    "email": "timur2006hh@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-05-01T08:49:16.234Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "internships.application",
+  "pk": 4,
+  "fields": {
+    "internship": 12,
+    "applicant": [
+      "timur"
+    ],
+    "hh_resume_url": "",
+    "resume_file": "resumes/Резюме__miuM6wx.docx",
+    "cover_letter": "",
+    "university": 1,
+    "course": "1",
+    "phone": "+79999999999",
+    "status": "pending",
+    "company_message": "",
+    "company_message_at": null,
+    "company_message_read": false,
+    "created_at": "2026-05-21T08:58:15.236Z",
+    "updated_at": "2026-05-21T08:58:15.236Z"
+  }
+},
+{
+  "model": "internships.company",
+  "pk": 2,
+  "fields": {
+    "name": "Simbirsoft",
+    "company_type": "commercial",
+    "university": null,
+    "description": "Крупная аутсорсинговая IT-компания. Топ-30 крупнейших IT-компаний России. Web, Mobile, QA, Data Science.",
+    "website": "https://simbirsoft.com",
+    "logo": "companies/SimbirSoft.webp",
+    "contact_email": "career@simbirsoft.com",
+    "address": "г. Ульяновск, ул. Гончарова, 36",
+    "owner": null,
+    "is_verified": true,
+    "created_at": "2026-05-01T08:08:56.538Z"
+  }
+},
+{
+  "model": "internships.company",
+  "pk": 4,
+  "fields": {
+    "name": "Научно-образовательный центр УлГТУ",
+    "company_type": "university",
+    "university": 1,
+    "description": "Структурное подразделение УлГТУ. Прикладные исследования в области встраиваемых систем, САПР и промышленной автоматизации.",
+    "website": "https://ulstu.ru",
+    "logo": "companies/3.webp",
+    "contact_email": "noc@ulstu.ru",
+    "address": "г. Ульяновск, ул. Северный Венец, 32",
+    "owner": null,
+    "is_verified": true,
+    "created_at": "2026-05-01T08:08:56.542Z"
+  }
+},
+{
+  "model": "internships.company",
+  "pk": 5,
+  "fields": {
+    "name": "Центр инновационного развития УлГУ",
+    "company_type": "university",
+    "university": 2,
+    "description": "Инновационное подразделение УлГУ. Проекты в области Data Science, AI и веб-технологий совместно со студентами.",
+    "website": "https://ulsu.ru",
+    "logo": "companies/4.webp",
+    "contact_email": "innovation@ulsu.ru",
+    "address": "г. Ульяновск, ул. Льва Толстого, 42",
+    "owner": null,
+    "is_verified": true,
+    "created_at": "2026-05-01T08:08:56.544Z"
+  }
+},
+{
+  "model": "internships.company",
+  "pk": 6,
+  "fields": {
+    "name": "Корпорация развития Ульяновской области",
+    "company_type": "government",
+    "university": null,
+    "description": "Государственная структура, курирующая IT-кластер Ульяновска. Стажировки в IT-компаниях региона.",
+    "website": "https://ulkorporacia.ru",
+    "logo": "companies/korprazv.webp",
+    "contact_email": "it@ulkorporacia.ru",
+    "address": "г. Ульяновск, ул. Спасская, 5",
+    "owner": null,
+    "is_verified": true,
+    "created_at": "2026-05-01T08:08:56.546Z"
+  }
+},
+{
+  "model": "internships.company",
+  "pk": 8,
+  "fields": {
+    "name": "НПО «Марс»",
+    "company_type": "commercial",
+    "university": 1,
+    "description": "Оборонно-промышленное предприятие Ульяновска. Встраиваемое ПО и навигационные системы для ВМФ.",
+    "website": "https://npomars.com",
+    "logo": "companies/mars.png",
+    "contact_email": "hr@npomars.com",
+    "address": "г. Ульяновск, ул. Марса, 1",
+    "owner": null,
+    "is_verified": true,
+    "created_at": "2026-05-01T08:08:56.551Z"
+  }
+},
+{
+  "model": "internships.company",
+  "pk": 12,
+  "fields": {
+    "name": "MediaSoft",
+    "company_type": "commercial",
+    "university": null,
+    "description": "Ульяновская IT-компания, ~150 сотрудников. Веб- и мобильная разработка, инженерные системы, заказная разработка для российских и зарубежных клиентов. Сильная команда frontend/backend и UX.",
+    "website": "https://mediasoft.team",
+    "logo": "companies/Mediasoft.webp",
+    "contact_email": "hr@mediasoft.team",
+    "address": "г. Ульяновск, ул. Карла Маркса, 13А",
+    "owner": [
+      "admin"
+    ],
+    "is_verified": true,
+    "created_at": "2026-05-15T10:30:38.412Z"
+  }
+},
+{
+  "model": "internships.company",
+  "pk": 13,
+  "fields": {
+    "name": "ITECH.group",
+    "company_type": "commercial",
+    "university": null,
+    "description": "Системный интегратор и разработчик корпоративного ПО. Ульяновск — один из ключевых центров разработки. Java/Spring, портальные решения, BI, интеграции с SAP и 1С.",
+    "website": "https://itech-group.ru",
+    "logo": "companies/itech.jpg",
+    "contact_email": "career@itech-group.ru",
+    "address": "г. Ульяновск, ул. Гончарова, 50",
+    "owner": [
+      "admin"
+    ],
+    "is_verified": true,
+    "created_at": "2026-05-15T10:30:38.417Z"
+  }
+}
+]

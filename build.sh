@@ -11,14 +11,14 @@ python manage.py collectstatic --no-input
 # 3. Применить миграции БД
 python manage.py migrate
 
-# 4. Наполнить демо-данными ОДИН раз — только если база ещё пустая.
-#    (seed_data.py очищает и пересоздаёт данные, поэтому повторно не запускаем.)
+# 4. Загрузить реальные данные (компании, стажировки, пользователи)
+#    вместе с привязкой к картинкам — ОДИН раз, если база ещё пустая.
+#    site_data.json — это дамп локальной базы (manage.py dumpdata).
 if python manage.py shell -c "import sys; from internships.models import Internship; sys.exit(0 if Internship.objects.exists() else 1)"; then
-    echo "Данные уже есть — пропускаю наполнение."
+    echo "Данные уже есть — пропускаю загрузку."
 else
-    echo "База пустая — наполняю демо-данными..."
-    python manage.py shell < seed_data.py || true
-    python manage.py shell < seed_more.py || true
+    echo "База пустая — загружаю данные из site_data.json..."
+    python manage.py loaddata site_data.json
 fi
 
 # 5. Создать суперпользователя для /admin/, если его ещё нет
